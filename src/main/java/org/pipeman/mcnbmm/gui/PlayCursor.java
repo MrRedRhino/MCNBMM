@@ -1,9 +1,9 @@
-package org.pipeman.gui;
+package org.pipeman.mcnbmm.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import org.pipeman.MCNBMM;
+import org.pipeman.mcnbmm.MCNBMM;
 
 public class PlayCursor {
     final int noteDistance = 15;

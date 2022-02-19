@@ -1,4 +1,4 @@
-package org.pipeman.sound;
+package org.pipeman.mcnbmm.sound;
 
 public enum Instruments {
     BASS,

@@ -1,4 +1,4 @@
-package org.pipeman.gui;
+package org.pipeman.mcnbmm.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,9 +7,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import org.pipeman.sound.Instrument;
-import org.pipeman.sound.Instruments;
-import org.pipeman.sound.Note;
+import org.pipeman.mcnbmm.sound.Instrument;
+import org.pipeman.mcnbmm.sound.Instruments;
+import org.pipeman.mcnbmm.sound.Note;
 
 import java.util.*;
 

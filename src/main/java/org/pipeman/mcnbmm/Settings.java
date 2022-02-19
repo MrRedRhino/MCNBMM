@@ -1,4 +1,4 @@
-package org.pipeman;
+package org.pipeman.mcnbmm;
 
 public class Settings {
     public static int lineDistanceX = 25;

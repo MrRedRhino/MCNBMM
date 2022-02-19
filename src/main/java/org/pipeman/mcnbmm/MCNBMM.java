@@ -1,4 +1,4 @@
-package org.pipeman;
+package org.pipeman.mcnbmm;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import org.pipeman.gui.GUI;
+import org.pipeman.mcnbmm.gui.GUI;
 
 public class MCNBMM extends ApplicationAdapter {
     SpriteBatch batch;

@@ -1,4 +1,4 @@
-package org.pipeman;
+package org.pipeman.mcnbmm;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
@@ -13,7 +13,7 @@ public class Launcher extends ApplicationAdapter {
 //        config.vSyncEnabled = false;
 //        config.foregroundFPS = -1;
 //        config.foregroundFPS = 2;
-        config.backgroundFPS = 10;
+//        config.backgroundFPS = 10;
         new LwjglApplication(new MCNBMM(), config);
     }
 }

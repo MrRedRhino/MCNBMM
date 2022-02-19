@@ -1,4 +1,4 @@
-package org.pipeman;
+package org.pipeman.mcnbmm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

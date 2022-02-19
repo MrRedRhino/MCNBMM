@@ -1,4 +1,4 @@
-package org.pipeman.gui;
+package org.pipeman.mcnbmm.gui;
 
 import com.badlogic.gdx.graphics.Color;
 

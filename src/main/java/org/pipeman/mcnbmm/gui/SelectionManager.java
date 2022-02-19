@@ -1,17 +1,16 @@
-package org.pipeman.gui;
+package org.pipeman.mcnbmm.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import org.pipeman.MCNBMM;
-import org.pipeman.sound.Note;
+import org.pipeman.mcnbmm.MCNBMM;
+import org.pipeman.mcnbmm.sound.Note;
 
 
 public class SelectionManager {
     private float lastX;
     private float lastY;
-    private boolean dragging;
     private float lastHeight;
     private float lastWidth;
 
@@ -26,11 +25,8 @@ public class SelectionManager {
         float xPos = lastX + xOffset;
         float yPos = lastY - yOffset;
 
-        if (Gdx.input.isTouched() && (Math.abs(width) > 3 || Math.abs(height) > 3)) {
-            dragging = true;
-        } else {
-            dragging = false;
-        }
+        boolean dragging;
+        dragging = Gdx.input.isTouched() && (Math.abs(width) > 3 || Math.abs(height) > 3);
 
         if (dragging) {
             renderer.rect(xPos, yPos, width, height);
@@ -50,12 +46,13 @@ public class SelectionManager {
                 for (int y = Math.min(bound3, bound4); y < Math.max(bound3, bound4); y++) {
                     Vector2 v = GuiUtil.coordToNotePos(new Vector2(x, Gdx.graphics.getHeight() - y), yOffset, xOffset, 0);
                     Note n = MCNBMM.getGui().instruments.get(0).getNote((int) v.x, (int) v.y);
-//                    MCNBMM.getGui().instruments.get(0).addNote((int) v.x, (int) v.y);
                     if (n == null) continue;
-                    n.selected = lastWidth < width;
-//                    renderer.circle(x, y, 3);
+                    if (Math.abs(lastWidth) - Math.abs(width) != 0) {
+                        n.selected = Math.abs(lastWidth) - Math.abs(width) < 0;
+                    }
                 }
             }
+
             renderer.setColor(Color.FOREST);
             renderer.rect(xPos, yPos + height, lastWidth, lastHeight - height);
             // ============================================================================
@@ -73,10 +70,10 @@ public class SelectionManager {
                 for (int y = Math.min(bound3, bound4); y < Math.max(bound3, bound4); y++) {
                     Vector2 v = GuiUtil.coordToNotePos(new Vector2(x, Gdx.graphics.getHeight() - y), yOffset, xOffset, 0);
                     Note n = MCNBMM.getGui().instruments.get(0).getNote((int) v.x, (int) v.y);
-//                    MCNBMM.getGui().instruments.get(0).addNote((int) v.x, (int) v.y);
                     if (n == null) continue;
-                    n.selected = lastHeight < height;
-//                    renderer.circle(x, y, 3);
+                    if (Math.abs(lastHeight) - Math.abs(height) != 0) {
+                        n.selected = Math.abs(lastHeight) - Math.abs(height) < 0;
+                    }
                 }
             }
 

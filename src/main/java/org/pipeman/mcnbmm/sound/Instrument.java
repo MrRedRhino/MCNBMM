@@ -1,4 +1,4 @@
-package org.pipeman.sound;
+package org.pipeman.mcnbmm.sound;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import org.pipeman.MCNBMM;
-import org.pipeman.gui.ColorPalette;
+import org.pipeman.mcnbmm.MCNBMM;
+import org.pipeman.mcnbmm.gui.ColorPalette;
 
 import java.util.*;
 
@@ -142,29 +142,27 @@ public class Instrument {
         return sound;
     }
 
-    public boolean selectNote(int tick, int note) {
+    public void selectNote(int tick, int note) {
         Note n = getNote(tick, note);
         if (n != null) {
             n.selected = !n.selected;
         }
-        return n == null;
     }
 
     // returns true if the note has been added, false ich it already existed
-    public boolean addNote(int tick, int note) {
+    public void addNote(int tick, int note) {
         Note newNote = new Note(note, this.getSound());
         if (notes.containsKey(tick)) {
             ArrayList<Note> ns = notes.get(tick);
             for (Note n : ns) {
                 if (n.note == note) {
-                    return false;
+                    return;
                 }
             }
             ns.add(newNote);
         } else {
             notes.put(tick, new ArrayList<>(List.of(newNote)));
         }
-        return true;
     }
 
     public void addOrSelectNote(int tick, int note) {
