@@ -25,9 +25,8 @@ public class GuiUtil {
     }
 
     public static Vector2 coordToNotePos(Vector2 loc, int yOffset, int xOffset, int instrumentIndex) {
-        int note = (int) ((230 - loc.y + yOffset + instrumentIndex * yDistance) / 10); // 233 > loc.y
+        int note = (int) ((260 - loc.y + yOffset + instrumentIndex * yDistance) / 10) - 1; // 233 > loc.y
         int tick = (int) ((loc.x - 300 - xOffset) / 15);
-
         return new Vector2(tick, note);
     }
 }

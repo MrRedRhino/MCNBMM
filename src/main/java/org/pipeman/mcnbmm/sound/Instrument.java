@@ -95,7 +95,7 @@ public class Instrument {
         int y = lineIndex * lineDistance + yOffset;
 
         renderer.setColor(ColorPalette.sheetLine);
-        for (int line = 0; line < 24; line++) {
+        for (int line = 0; line <= 25; line++) {
             Gdx.gl.glLineWidth(1);
             Vector2 start = new Vector2(290, Gdx.graphics.getHeight() - (line * distanceY + y));
             Vector2 end = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight() - (line * distanceY + y));
@@ -105,7 +105,7 @@ public class Instrument {
 
     public void drawNotes(ShapeRenderer renderer, int xOffset, int yOffset) {
         int xPos;
-        int y = lineIndex * lineDistance + yOffset + 230;
+        int y = lineIndex * lineDistance + yOffset + 250;
         for (Map.Entry<Integer, ArrayList<Note>> entry : notes.entrySet()) {
             xPos = entry.getKey() * distanceX + xOffset + 300;
             for (Note n : entry.getValue()) {
@@ -119,6 +119,19 @@ public class Instrument {
                 } else {
                     renderer.rect(xPos, Gdx.graphics.getHeight() - (y - n.note * distanceY), 15, 10);
                 }
+            }
+        }
+    }
+
+    public void drawNoteNames(ShapeRenderer renderer, int yOffset) {
+        ArrayList<Integer> whiteNotes = new ArrayList<>(List.of(1, 2, 4, 6, 7, 9, 11, 13, 14, 16, 18, 19, 21, 23));
+        for (int i = 0; i < 25; i++) {
+            if (whiteNotes.contains(i)) {
+                renderer.setColor(Color.GRAY);
+                renderer.rect(275, Gdx.graphics.getHeight() - (10 * i) - yOffset - 9, 15, 9);
+                renderer.setColor(Color.BLACK);
+            } else {
+                renderer.rect(275, Gdx.graphics.getHeight() - (10 * i) - yOffset - 9, 15, 9);
             }
         }
     }
@@ -142,11 +155,12 @@ public class Instrument {
         return sound;
     }
 
-    public void selectNote(int tick, int note) {
+    public boolean selectNote(int tick, int note) {
         Note n = getNote(tick, note);
         if (n != null) {
             n.selected = !n.selected;
         }
+        return n != null;
     }
 
     // returns true if the note has been added, false ich it already existed

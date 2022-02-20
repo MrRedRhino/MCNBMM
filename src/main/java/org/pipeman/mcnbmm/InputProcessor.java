@@ -9,6 +9,17 @@ public class InputProcessor implements com.badlogic.gdx.InputProcessor {
         switch (i) {
             case Input.Keys.SPACE -> MCNBMM.getGui().startStop();
             case Input.Keys.DEL -> MCNBMM.getGui().deleteSelectedNotes();
+
+            case Input.Keys.Y -> {
+                if (Gdx.input.isKeyPressed(Input.Keys.SYM)) {
+                    MCNBMM.getGui().undo();
+                }
+            }
+            case Input.Keys.Z -> {
+                if (Gdx.input.isKeyPressed(Input.Keys.SYM)) {
+                    MCNBMM.getGui().redo();
+                }
+            }
         }
         return false;
     }

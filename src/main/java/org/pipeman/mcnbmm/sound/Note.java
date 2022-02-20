@@ -3,7 +3,7 @@ package org.pipeman.mcnbmm.sound;
 import com.badlogic.gdx.audio.Sound;
 
 public class Note {
-    final int note;
+    public final int note;
     final float volume = 1f;
     final Sound sound;
     public boolean selected;

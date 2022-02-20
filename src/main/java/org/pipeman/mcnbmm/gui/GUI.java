@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import org.pipeman.mcnbmm.sound.Instrument;
 import org.pipeman.mcnbmm.sound.Instruments;
 import org.pipeman.mcnbmm.sound.Note;
+import org.pipeman.mcnbmm.undo.UndoRedo;
 
 import java.util.*;
 
@@ -23,7 +24,8 @@ public class GUI {
     int cursorTick = 0;
     final BitmapFont font = new BitmapFont();
     final PlayCursor cursor = new PlayCursor();
-    SelectionManager selectionManager;
+    final SelectionManager selectionManager;
+    public final UndoRedo undoRedo = new UndoRedo();
 
     public GUI() {
         selectionManager = new SelectionManager();
@@ -66,6 +68,7 @@ public class GUI {
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
         for (Instrument instrument : instruments) {
             instrument.drawNotes(shapeRenderer, songScrollOffsetX, songScrollOffsetY);
+            instrument.drawNoteNames(shapeRenderer, songScrollOffsetY);
         }
 
         batch.begin();
@@ -103,23 +106,34 @@ public class GUI {
             Vector2 noteVector = GuiUtil.coordToNotePos(mousePos, songScrollOffsetY, songScrollOffsetX, instrumentIndex);
             if (instrumentIndex < 0 || instrumentIndex >= instruments.size() || noteVector.y < 0 || noteVector.y > 24) return;
 
-            int tick = (int) noteVector.y;
-            int note = (int) noteVector.x;
+            int tick = (int) noteVector.x;
+            int note = (int) noteVector.y;
             Instrument instrument = instruments.get(instrumentIndex);
 
             if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
                 instruments.forEach(i -> i.notes.values().forEach(notes -> notes.forEach(n -> n.selected = false)));
             }
+
             if (Gdx.input.isKeyPressed(Input.Keys.SYM)) {
-                instrument.addNote(note, tick);
+                instrument.addNote(tick, note);
+                undoRedo.addNote(tick, note, instrument);
+                selectionManager.setAborted(true);
             } else {
-                instrument.selectNote(note, tick);
+                selectionManager.setAborted(instrument.selectNote(tick, note));
             }
         }
     }
 
     public void deleteSelectedNotes() {
         instruments.forEach(i -> i.notes.values().forEach(notes -> notes.removeIf(n -> (n.selected))));
+    }
+
+    public void undo() {
+        undoRedo.undo();
+    }
+
+    public void redo() {
+        undoRedo.redo();
     }
 
     public void startStop() {
